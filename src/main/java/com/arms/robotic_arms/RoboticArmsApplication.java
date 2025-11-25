@@ -10,12 +10,11 @@ public class RoboticArmsApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(RoboticArmsApplication.class, args);
 	}
-
 	@Override
 	public void run(String... args) {
 		new Thread(() -> {
-			RobotTcpServer server = new RobotTcpServer();
-			server.start(); // This runs on port 8080
+			RobotTcpLoginServer server = new RobotTcpLoginServer();
+			server.start(8080); // ✅ TCP PORT HERE
 		}).start();
 	}
 }
