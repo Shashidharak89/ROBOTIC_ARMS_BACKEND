@@ -10,10 +10,10 @@ public class RobotTcpLoginServer {
     public void start(int port) {
         try {
             ServerSocket serverSocket = new ServerSocket(port);
-            System.out.println("✅ TCP Login Server running on port " + port);
+            System.out.println("TCP Login Server running on port " + port);
 
             Socket client = serverSocket.accept();
-            System.out.println("🤖 Robot connected from " + client.getInetAddress());
+            System.out.println("Robot connected from " + client.getInetAddress());
 
             InputStream in = client.getInputStream();
             OutputStream out = client.getOutputStream();
@@ -22,14 +22,14 @@ public class RobotTcpLoginServer {
                 byte[] frame = readFrame(in);
                 if (frame == null) break;
 
-                System.out.println("📥 RX: " + toHex(frame));
+                System.out.println("RX: " + toHex(frame));
 
                 int msgId = ((frame[1] & 0xFF) << 8) | (frame[2] & 0xFF);
 
                 if (msgId == 0x1002) {
                     System.out.println("➡ LOGIN received");
                     byte[] response = buildLoginAck(frame);
-                    System.out.println("📤 TX: " + toHex(response));
+                    System.out.println("TX: " + toHex(response));
                     out.write(response);
                     out.flush();
                 }
