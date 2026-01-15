@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Robot Control Panel</title>
+</head>
+<body>
+
+<h2>Robotic Arm Control</h2>
+
+<!-- Button to plug charger -->
+<button onclick="send('plug')">🔌 Plug In</button>
+
+<!-- Button to unplug charger -->
+<button onclick="send('unplug')">❌ Unplug</button>
+
+<p id="result"></p>
+
+<script>
+    // Calls REST API
+    function send(cmd) {
+        fetch('/' + cmd)
+            .then(r => r.text())
+            .then(t => document.getElementById('result').innerText = t);
+    }
+</script>
+
+</body>
+</html>
